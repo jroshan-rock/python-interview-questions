@@ -1,4 +1,4 @@
-# Top 100 Python Interview Questions
+# 100 Core Python Interview Questions in 2026
 
 <div>
 <p align="center">
@@ -13,102 +13,108 @@
 
 ## 1. What are the _key features_ of _Python_?
 
-**Python** is a versatile and popular programming language known for its simplicity, **elegant syntax**, and a vast ecosystem of libraries. Let's look at some of the key features that make Python stand out.
+**Python** is a versatile and popular programming language known for its simplicity, **elegant syntax**, and a vast ecosystem of libraries. As of 2026, it remains a leader in software development due to the following key features.
 
 ### Key Features of Python
 
-#### 1. Interpreted and Interactive
-
-Python uses an interpreter, allowing developers to run code **line-by-line**, making it ideal for rapid prototyping and debugging.
+#### 1. Interpreted and Optimized
+Python uses an interpreter to run code **line-by-line**, which facilitates rapid prototyping. Modern versions (3.11+) include a **Specializing Adaptive Interpreter** and JIT components that significantly improve execution speed compared to older releases.
 
 #### 2. Easy to Learn and Read
-
-Python's **clean, readable syntax**, often resembling plain English, reduces the cognitive load for beginners and experienced developers alike.
+Python's **clean, readable syntax** uses English keywords and mandatory indentation. This reduces the cognitive load and ensures that the code is maintainable across large development teams.
 
 #### 3. Cross-Platform Compatibility
+Python is **platform-independent**. Code written on Windows runs on Linux or macOS without modification, provided the platform has a compatible Python interpreter installed.
 
-Python is versatile, running on various platforms, such as Windows, Linux, and macOS, without requiring platform-specific modifications.
-
-#### 4. Modular and Scalable
-
-Developers can organize their code into modular packages and reusabale functions.
+#### 4. Automatic Memory Management
+Python manages memory through **Reference Counting** and a **Generational Garbage Collector**. This shields developers from manual memory deallocation and helps prevent memory leaks.
 
 #### 5. Rich Library Ecosystem
+The **Python Package Index (PyPI)** hosts over 600,000 libraries. It provides robust solutions for diverse fields, including `TensorFlow` for AI, `Pandas` for data analysis, and `FastAPI` for web services.
 
-The Python Package Index (PyPI) hosts over 260,000 libraries, providing solutions for tasks ranging from web development to data analytics.
+#### 6. Dynamically Typed with Type Hinting
+While Python infers data types at execution, it supports **Optional Type Hinting**. This allows developers to use static analysis tools (like `mypy`) to catch errors before the code runs.
 
-#### 6. Exceptionally Versatile
+#### 7. Object-Oriented and Multiparadigm
+Everything in Python is an **object**. It supports **Object-Oriented Programming (OOP)**, functional, and procedural paradigms, allowing developers to choose the best approach for their specific problem.
 
-From web applications to scientific computing, Python is equally proficient in diverse domains.
+#### 8. Extensible and Embeddable
+Python allows the integration of **C, C++, or Rust** modules for performance-critical tasks. Conversely, Python can be embedded within other applications to provide a powerful scripting interface.
 
-#### 7. Memory Management
+#### 9. High-Level Abstraction
+Python abstracts low-level details such as CPU architecture and complex memory pointer management, allowing developers to focus entirely on implementing the business logic.
 
-Python seamlessly allocates and manages memory, shielding developers from low-level tasks, such as memory deallocation.
+#### 10. Modern Concurrency Support
+With the evolution of `asyncio` and the introduction of **free-threaded Python** (removing the Global Interpreter Lock dependency in specific builds), Python 3.13+ offers enhanced support for parallel execution on multi-core processors.
 
-#### 8. Dynamically Typed
+```python
+# Demonstrating readability, dynamic typing, and type hints
+def calculate_area(radius: float) -> float:
+    import math
+    # High-level abstraction and clear syntax
+    return math.pi * (radius ** 2)
 
-Python infers the data type of a variable during execution, easing the declartion and manipulation of variables.
-
-#### 9. Object-Oriented
-
-Python supports object-oriented paradigms, where everything is an **object**, offering attributes and methods to manipulate data.
-
-#### 10. Extensible
-
-With its C-language API, developers can integrate performance-critical tasks and existing C modules with Python.
+circle_radius = 5.0
+print(f"Area: {calculate_area(circle_radius):.2f}")
+```
 <br>
 
 ## 2. How is _Python_ executed?
 
-**Python** source code is processed through various steps before it can be executed. Let's explore the key stages in this process.
+Python source code is processed through several stages before execution. In 2026, while **CPython** remains the standard, the introduction of specialized optimizations has refined the traditional execution flow.
 
-### Compilation & Interpretation
+### Compilation and Interpretation
 
-Python code goes through both **compilation** and **interpretation**. 
+Python utilizes a hybrid model of **compilation** and **interpretation**.
 
-- **Bytecode Compilation**: High-level Python code is transformed into low-level bytecode by the Python interpreter with the help of a compiler. Bytecode is a set of instructions that Python's virtual machine (PVM) can understand and execute.
-  
-- **On-the-fly Interpretation**: The PVM reads and executes bytecode instructions in a step-by-step manner.
-  
-This dual approach known as "compile and then interpret" is what sets Python (and certain other languages) apart. 
+*   **Bytecode Compilation**: The Python compiler transforms high-level source code (`.py`) into **Bytecode** (`.pyc`). Bytecode represents a platform-independent set of instructions designed for the **Python Virtual Machine (PVM)**.
+*   **The Virtual Machine (PVM)**: The PVM is the runtime engine that interprets the bytecode. It loops through the instructions and maps them to the corresponding machine-specific actions.
 
-### Bytecode versus Machine Code Execution
+This "compile once, interpret anywhere" approach ensures that Python remains **platform-independent**, provided a compatible PVM is installed.
 
-While some programming languages compile directly to machine code, Python compiles to bytecode. This bytecode is then executed by the Python virtual machine. This extra step of bytecode execution **can make Python slower** in certain use-cases when compared to languages that compile directly to machine code.
+### Source Code to Bytecode: The Pipeline
 
-The advantage, however, is that bytecode is platform-independent. A Python program can be run on any machine with a compatible PVM, ensuring cross-platform support.
+The transition from text to executable instructions involves four primary phases:
 
-### Source Code to Bytecode: Compilation Steps
+1.  **Lexical Analysis**: The **Tokenizer** breaks the source code into basic units called **tokens**.
+2.  **Syntax Parsing**: Tokens are organized into an **Abstract Syntax Tree (AST)**, which represents the logical structure of the code according to Python's grammar rules.
+3.  **Compilation**: The AST is converted into a **Control Flow Graph (CFG)** and finally into **Bytecode**.
+4.  **Optimization**: Modern Python (3.11+) includes a **Specializing Adaptive Interpreter** that identifies "hot" (frequently executed) bytecode patterns and replaces them with faster, type-specific instructions.
 
-1. **Lexical Analysis**: The source code is broken down into tokens, identifying characters and symbols for Python to understand.
-2. **Syntax Parsing**: Tokens are structured into a parse tree to establish the code's syntax and grammar.
-3. **Semantic Analysis**: Code is analyzed for its meaning and context, ensuring it's logically sound.
-4. **Bytecode Generation**: Based on the previous steps, bytecode instructions are created.
+### Bytecode versus Machine Code
+
+Unlike C or Rust, which compile to native **Machine Code** ($L \rightarrow M$), Python compiles to **Bytecode** ($L \rightarrow B \rightarrow M$). This abstraction layer allows for dynamic features like duck typing and reflection but introduces overhead. To mitigate this, modern versions use **Constant Folding** (calculating expressions like $15 \times 20$ at compile time) to improve efficiency.
 
 ### Just-In-Time (JIT) Compilation
 
-While Python typically uses a combination of interpretation and compilation, **JIT** boosts efficiency by selectively compiling parts of the program that are frequently used or could benefit from optimization.
+In recent releases (starting with CPython 3.13), Python has integrated a **Copy-and-Patch JIT compiler**. 
 
-JIT compiles sections of the program to machine code on-the-fly. This direct machine code generation for frequently executed parts can significantly speed up those segments, blurring the line between traditional interpreters and compilers.
+*   **Tier 1 Execution**: Standard bytecode interpretation with adaptive specialization.
+*   **Tier 2 Execution**: If a code path is executed frequently enough, the **JIT** generates native machine code for that specific trace on-the-fly. This significantly reduces the overhead of the PVM's dispatch loop for computationally intensive tasks.
 
 ### Code Example: Disassembly of Bytecode
+
+We can inspect the intermediate bytecode using the `dis` module.
 
 ```python
 import dis
 
 def example_func():
+    # Demonstrating constant folding: 15 * 20 is optimized to 300
     return 15 * 20
 
 # Disassemble to view bytecode instructions
 dis.dis(example_func)
 ```
 
-Disassembling code using Python's `dis` module can reveal the underlying bytecode instructions that the PVM executes. Here's the disassembled output for the above code:
-
+**Output:**
 ```plaintext
-  4           0 LOAD_CONST               2 (300)
-              2 RETURN_VALUE
+  1           0 RESUME                   0
+  3           2 LOAD_CONST               1 (300)
+              4 RETURN_VALUE
 ```
+
+The `RESUME` opcode is a modern addition used for internal generator and tracing states, while `LOAD_CONST` shows that the multiplication was pre-calculated during the compilation phase.
 <br>
 
 ## 3. What is _PEP 8_ and why is it important?
